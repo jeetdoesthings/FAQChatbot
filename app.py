@@ -74,6 +74,17 @@ try:
 except Exception:
     pass
 
+# ZeroGPU decorator support for Hugging Face Spaces
+try:
+    import spaces
+except Exception:
+    class spaces:
+        @staticmethod
+        def GPU(func=None, duration=None):
+            if func is None:
+                return lambda f: f
+            return func
+
 import gradio as gr
 
 from src.chatbot_core import DepartmentChatbot
@@ -121,6 +132,7 @@ CUSTOM_CSS = """
 }
 """
 
+@spaces.GPU
 def handle_text_chat(user_message, chat_history):
     """Processes typed text messages."""
     if not user_message or not user_message.strip():
@@ -136,6 +148,7 @@ def handle_text_chat(user_message, chat_history):
     chat_history.append((user_message, bot_reply))
     return "", chat_history, audio_out, status_label, sources_label
 
+@spaces.GPU
 def handle_voice_chat(audio_input, chat_history):
     """Transcribes audio using Whisper then processes question."""
     if audio_input is None:
@@ -160,6 +173,7 @@ def handle_clear_chat():
     bot.reset_memory()
     return [], None, "Memory Cleared", "N/A"
 
+@spaces.GPU
 def handle_poster_generation(title, tagline, date, venue, highlights, theme):
     """Generates an event poster via the studio tab."""
     poster_path = poster_studio.generate(
