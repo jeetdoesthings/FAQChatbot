@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "category": "Admissions & Eligibility",
+    "question": "What are the eligibility criteria for B.Tech in Artificial Intelligence and Data Science?",
+    "answer": "Candidates must have passed 10+2 (Higher Secondary) with Physics, Mathematics, and Chemistry/Computer Science with a minimum of 60% aggregate marks (55% for reserved categories). Admission is based on state/national engineering entrance examinations (such as MHT-CET, JEE Main) followed by centralized counseling.",
+    "keywords": ["btech", "eligibility", "criteria", "admission", "marks", "cutoff", "ai", "data science"]
+  },
+  {
+    "id": 2,
+    "category": "Admissions & Eligibility",
+    "question": "What is the annual tuition fee for the Department programs?",
+    "answer": "The annual tuition fee for the B.Tech program is INR 1,65,000 per academic year. Additional fees include examination fees (INR 4,000/yr), lab maintenance (INR 6,000/yr), and a refundable security deposit of INR 10,000 upon admission. Government scholarships and merit fee-waivers are applicable as per state norms.",
+    "keywords": ["fee", "tuition", "cost", "scholarship", "charges", "payment", "annual"]
+  },
+  {
+    "id": 3,
+    "category": "Academics & Curriculum",
+    "question": "What is the department's mandatory attendance policy?",
+    "answer": "The department strictly enforces a minimum requirement of 75% aggregate attendance across all theory lectures and laboratory practicals in each semester. Students falling between 65% and 74% due to verified medical emergencies must submit official medical certificates to the Head of Department (HOD) for conditional examination hall tickets.",
+    "keywords": ["attendance", "minimum", "75%", "medical", "hall ticket", "policy", "absent"]
+  },
+  {
+    "id": 4,
+    "category": "Academics & Curriculum",
+    "question": "How are semester examinations structured and graded?",
+    "answer": "Grading follows a 10-point Cumulative Grade Point Average (CGPA) system. Evaluation consists of 40% Continuous Internal Assessment (two Mid-Semester In-Sem Tests of 20 marks each, quizzes, and lab continuous evaluation) and 60% End-Semester University Examination.",
+    "keywords": ["grading", "cgpa", "exam", "insem", "endsem", "internal assessment", "evaluation"]
+  },
+  {
+    "id": 5,
+    "category": "Academics & Curriculum",
+    "question": "What elective specializations are offered by the department?",
+    "answer": "The department offers specialized elective tracks in: 1) Deep Learning & Generative AI, 2) Autonomous Robotics & Edge AI, 3) Cloud Computing & MLOps, and 4) Natural Language Processing & Large Language Models. Electives begin from the 5th semester.",
+    "keywords": ["electives", "specialization", "tracks", "generative ai", "mlops", "robotics", "nlp"]
+  },
+  {
+    "id": 6,
+    "category": "Faculty & Office Hours",
+    "question": "Who is the Head of the Department (HOD) and how can I contact them?",
+    "answer": "The Head of Department is Dr. Rajesh K. Sharma, Professor of Artificial Intelligence. Office: Room 304, Third Floor, Technology Block. Official Office Hours for students are Monday, Wednesday, and Friday from 3:30 PM to 5:00 PM. Contact email: hod.ai@department.ac.in.",
+    "keywords": ["hod", "head", "rajesh sharma", "contact", "office hours", "room", "email"]
+  },
+  {
+    "id": 7,
+    "category": "Faculty & Office Hours",
+    "question": "How do I schedule an appointment with faculty advisors?",
+    "answer": "Faculty advisors are available during scheduled tutorial hours or by booking a slot via the student ERP portal under 'Mentor-Mentee Interaction'. Each student is assigned a dedicated faculty mentor upon enrollment.",
+    "keywords": ["mentor", "advisor", "appointment", "counseling", "faculty", "erp"]
+  },
+  {
+    "id": 8,
+    "category": "Laboratories & Infrastructure",
+    "question": "What laboratory computing facilities and GPU resources are available?",
+    "answer": "The department houses four specialized high-performance computing labs equipped with NVIDIA RTX 4090 and A100 GPU clusters, dedicated Edge-AI Jetson workstations, high-speed 10 Gbps fiber network, and 24/7 cloud sandbox access for academic deep learning research.",
+    "keywords": ["lab", "gpu", "infrastructure", "nvidia", "a100", "rtx 4090", "workstation", "hpc"]
+  },
+  {
+    "id": 9,
+    "category": "Placements & Internships",
+    "question": "What is the placement record and internship policy of the department?",
+    "answer": "The department boasts a 92% placement rate with the highest package reaching 34 LPA and an average package of 8.6 LPA in the previous academic year. Mandatory 8-week summer internships are required after the 6th semester, facilitated by the Department Training & Placement Cell (T&P).",
+    "keywords": ["placement", "internship", "package", "highest", "average", "t&p", "jobs", "recruiters"]
+  },
+  {
+    "id": 10,
+    "category": "Events & Extracurriculars",
+    "question": "What major annual events, symposiums, and hackathons are hosted?",
+    "answer": "The department hosts: 1) 'AI-Conflux' - Annual National Technical Symposium & 36-hour Hackathon in February, 2) 'NeurOlympics' - Department Sports & Cultural Week in October, and 3) Monthly Industry Guest Lecture & Workshop Series.",
+    "keywords": ["events", "hackathon", "symposium", "ai-conflux", "neurolympics", "workshops", "guest lectures"]
+  },
+  {
+    "id": 11,
+    "category": "Student Welfare & Grievance",
+    "question": "How can students submit an academic grievance or re-evaluation request?",
+    "answer": "Re-evaluation requests can be submitted via the Student Examination Portal within 7 working days from the declaration of results, along with a fee of INR 500 per paper. For non-academic grievances, the Department Student Grievance Redressal Committee meets every second Thursday.",
+    "keywords": ["grievance", "re-evaluation", "rechecking", "marks", "complaint", "committee"]
+  },
+  {
+    "id": 12,
+    "category": "Library & Research",
+    "question": "Does the department provide access to IEEE, ACM, and digital libraries?",
+    "answer": "Yes, all enrolled department students and research scholars are granted institutional remote and campus access to IEEE Xplore, ACM Digital Library, SpringerLink, and ScienceDirect through the centralized university library proxy credentials.",
+    "keywords": ["library", "ieee", "acm", "research papers", "journals", "digital library"]
+  }
+]

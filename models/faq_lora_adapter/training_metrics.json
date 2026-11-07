@@ -1,0 +1,21 @@
+{
+  "base_model": "distilgpt2",
+  "dataset_samples": 15,
+  "epochs": 4,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "trainable_params": 147456,
+  "all_params": 82060032,
+  "trainable_percentage": 0.18,
+  "initial_loss": 9.8137,
+  "final_loss": 6.1742,
+  "initial_perplexity": 18281.78,
+  "final_perplexity": 480.19,
+  "training_time_seconds": 7.2,
+  "epoch_losses": [
+    9.5467,
+    9.0026,
+    7.9528,
+    6.1742
+  ]
+}
