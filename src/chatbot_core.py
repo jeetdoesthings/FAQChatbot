@@ -78,31 +78,59 @@ class DepartmentChatbot:
         """Returns current multi-turn conversation history."""
         return list(self.history)
 
+    def generate_with_lora(self, prompt: str, max_new_tokens: int = 40) -> str:
+        """
+        Generates text using the LoRA fine-tuned causal language model (Unit U2).
+        """
+        if self.model is None or self.tokenizer is None:
+            return "LoRA model not initialized."
+        try:
+            formatted = f"<|system|>\nYou are an official Department FAQ Assistant.\n<|user|>\n{prompt}\n<|assistant|>\n"
+            inputs = self.tokenizer(formatted, return_tensors="pt").to(self.device)
+            with torch.no_grad():
+                output_ids = self.model.generate(
+                    **inputs,
+                    max_new_tokens=max_new_tokens,
+                    min_new_tokens=10,
+                    pad_token_id=self.tokenizer.eos_token_id,
+                    do_sample=False,
+                    repetition_penalty=1.2
+                )
+            generated_ids = output_ids[0][inputs["input_ids"].shape[1]:]
+            decoded = self.tokenizer.decode(generated_ids, skip_special_tokens=True)
+            return decoded.strip()
+        except Exception as e:
+            return f"Generation notice: {e}"
+
     def _check_poster_request(self, query: str) -> Optional[Tuple[str, str]]:
         """Detects if user asks for an event poster generation."""
         q_lower = query.lower()
         poster_keywords = ["poster", "banner", "flyer", "event graphic"]
         if any(kw in q_lower for kw in poster_keywords):
-            # Determine event name
+            # Determine event name and details
             if "hackathon" in q_lower or "ai-conflux" in q_lower or "conflux" in q_lower:
                 event_title = "AI-CONFLUX 2026"
                 tagline = "National 36-Hour AI Hackathon & Tech Symposium"
+                date_str = "October 24-25, 2026"
                 venue = "NVIDIA AI Lab & Main Auditorium"
                 highlights = "₹1,50,000 Cash Prizes • Free Swag • IEEE Certificates"
             elif "neurolympics" in q_lower or "sports" in q_lower or "cultural" in q_lower:
                 event_title = "NEUROLYMPICS 2026"
                 tagline = "Department Annual Sports & Cultural Fiesta"
+                date_str = "November 14-16, 2026"
                 venue = "University Sports Complex & Open Amphitheater"
                 highlights = "12 Tournament Events • Trophy & Medals • DJ Night"
             else:
                 event_title = "AI INNOVATION SUMMIT"
                 tagline = "Department Technical Guest Lecture & Project Expo"
+                date_str = "December 5, 2026"
                 venue = "Technology Block Seminar Hall 1"
                 highlights = "Keynote from Industry AI Leaders • Networking Lunch"
 
             poster_path = self.poster_gen.generate(
                 event_title=event_title,
                 tagline=tagline,
+                date_str=date_str,
                 venue_str=venue,
                 highlights=highlights
             )
@@ -110,6 +138,7 @@ class DepartmentChatbot:
                 f"🎨 **Generated Official Event Poster for {event_title}!**\n\n"
                 f"- **Event:** {event_title}\n"
                 f"- **Tagline:** {tagline}\n"
+                f"- **Date:** {date_str}\n"
                 f"- **Venue:** {venue}\n"
                 f"- **Highlights:** {highlights}\n"
                 f"- **Contact:** {SUPPORT_EMAIL}\n\n"
@@ -142,7 +171,7 @@ class DepartmentChatbot:
         sanitized_input, pii_detected = self.guardrails.redact_pii(user_message.strip())
 
         # 2. Check for Event Poster Request (Unit U4)
-        poster_result = self._check_poster_request(user_message)
+        poster_result = self._check_poster_request(sanitized_input)
         if poster_result:
             ans_text, poster_file = poster_result
             self._update_memory(sanitized_input, ans_text)

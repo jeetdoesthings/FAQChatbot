@@ -38,7 +38,7 @@ class TTSEngine:
         if not clean_text:
             return None
 
-        # Truncate text if excessively long for speech (up to 300 words)
+        # Truncate text if excessively long for speech (up to 80 words)
         words = clean_text.split()
         if len(words) > 80:
             clean_text = " ".join(words[:80]) + "... For the complete details, please read the displayed text response."
@@ -55,16 +55,25 @@ class TTSEngine:
             tts.save(str(output_file))
             return str(output_file)
         except Exception as e:
-            print(f"[TTSEngine Warning] gTTS failed ({e}), attempting offline macOS TTS...")
+            print(f"[TTSEngine Warning] gTTS failed ({e}), attempting offline fallback...")
 
-        # Fallback: macOS native `say` command
+        # Fallback 1: macOS native `say` command (if on macOS)
         try:
             aiff_file = self.output_dir / f"response_{text_hash}.aiff"
-            subprocess.run(["say", "-v", "Samantha", "-o", str(aiff_file), clean_text], check=True)
+            subprocess.run(["say", "-v", "Samantha", "-o", str(aiff_file), clean_text], check=True, timeout=10)
             return str(aiff_file)
-        except Exception as e:
-            print(f"[TTSEngine Error] Fallback TTS failed: {e}")
-            return None
+        except Exception:
+            pass
+
+        # Fallback 2: Linux `espeak` command (if installed)
+        try:
+            wav_file = self.output_dir / f"response_{text_hash}.wav"
+            subprocess.run(["espeak", "-w", str(wav_file), clean_text], check=True, timeout=10)
+            return str(wav_file)
+        except Exception:
+            pass
+
+        return None
 
 if __name__ == "__main__":
     engine = TTSEngine()

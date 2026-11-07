@@ -57,7 +57,7 @@ def train_lora_faq(
     model_name: str = BASE_MODEL_NAME,
     dataset_path: Path = LORA_DATASET_PATH,
     output_dir: Path = LORA_OUTPUT_DIR,
-    epochs: int = 5,
+    epochs: int = 4,
     lr: float = 3e-4,
     batch_size: int = 2,
     lora_r: int = 8,

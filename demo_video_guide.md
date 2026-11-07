@@ -68,7 +68,7 @@
 
 ---
 
-## 🛠️ How to Record Your Video on Mac in 3 Easy Steps:
+## 🛠️ How to Record Your Video on Mac in 4 Easy Steps:
 1. Press `Cmd + Shift + 5` to open macOS built-in screen recorder.
 2. Select your microphone in **Options** and click **Record Entire Screen** or **Selected Portion**.
 3. Run `python3 app.py` (or `python3 app.py --share`) and follow the 5 scenes above.

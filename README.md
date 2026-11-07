@@ -140,23 +140,6 @@ Anyone on desktop, tablet, or smartphone can interact via text or voice input an
 │   └── tts_engine.py           # Text-to-speech audio synthesizer
 └── tests/
     └── test_chatbot.py         # Test suite validating Units U1 to U5
-```
-│   ├── lora_training_loss.png  # Training loss convergence chart
-│   └── posters/                # Generated high-resolution event posters
-├── src/
-│   ├── chatbot_core.py         # Multi-turn engine integrating RAG, LoRA, and Guardrails
-│   ├── config.py               # Hyperparameters and path configurations
-│   ├── guardrails.py           # Out-of-scope refusal, PII redaction & hallucination block
-│   ├── lora_training.py        # LoRA training pipeline with PEFT
-│   ├── poster_generator.py     # Pillow-based publication poster graphic generator
-│   ├── rag_retriever.py        # Dense Sentence-BERT retrieval engine
-│   ├── stt_whisper.py          # OpenAI Whisper speech-to-text module
-│   ├── system_prompt.py        # System prompt with academic tone and scope definitions
-│   └── tts_engine.py           # Text-to-speech audio synthesizer
-└── tests/
-    └── test_chatbot.py         # Test suite validating Units U1 to U5
-```
-
 ---
 
 ## 🛡️ Safety, Guardrails & Privacy Guarantee

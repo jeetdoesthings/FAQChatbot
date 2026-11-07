@@ -8,6 +8,8 @@ Implements:
 import re
 from typing import Tuple, Dict, Any, Optional
 
+from src.config import RAG_SIMILARITY_THRESHOLD
+
 OUT_OF_SCOPE_PATTERNS = [
     r"\b(recipe|cook|baking|cake|pizza|burger|ingredient)\b",
     r"\b(movie|cinema|netflix|actor|actress|hollywood|bollywood)\b",
@@ -28,7 +30,7 @@ PII_PATTERNS = {
 }
 
 class DepartmentGuardrails:
-    def __init__(self, similarity_threshold: float = 0.40):
+    def __init__(self, similarity_threshold: float = RAG_SIMILARITY_THRESHOLD):
         self.similarity_threshold = similarity_threshold
         self.compiled_out_of_scope = [re.compile(p, re.IGNORECASE) for p in OUT_OF_SCOPE_PATTERNS]
 
