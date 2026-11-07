@@ -44,7 +44,8 @@ class DepartmentChatbot:
         # Model & Tokenizer for Generation
         self.tokenizer = None
         self.model = None
-        self.device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
+        # Explicit CPU device prevents ZeroGPU CUDA virtualization conflicts
+        self.device = torch.device("cpu")
         self._init_llm()
 
     def _init_llm(self):

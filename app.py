@@ -133,58 +133,77 @@ CUSTOM_CSS = """
 """
 
 @spaces.GPU
+def _zerogpu_probe():
+    """Satisfies ZeroGPU startup scanner while main inference runs stably on CPU."""
+    return ""
+
 def handle_text_chat(user_message, chat_history):
     """Processes typed text messages."""
     if not user_message or not user_message.strip():
         return "", chat_history, None, "Enter a valid question.", "N/A"
 
-    response = bot.ask(user_message, generate_speech=True)
-    
-    bot_reply = response["answer"]
-    audio_out = response["audio_path"]
-    status_label = f"Status: {response['guardrail_status']} (Confidence: {response['confidence']*100:.1f}%)"
-    sources_label = "Sources: " + (", ".join(response["sources"]) if response["sources"] else "None (Refused/Out-of-Scope)")
+    try:
+        response = bot.ask(user_message, generate_speech=True)
+        bot_reply = response["answer"]
+        audio_out = response.get("audio_path")
+        status_label = f"Status: {response['guardrail_status']} (Confidence: {response['confidence']*100:.1f}%)"
+        sources_label = "Sources: " + (", ".join(response["sources"]) if response["sources"] else "None (Refused/Out-of-Scope)")
 
-    chat_history.append((user_message, bot_reply))
-    return "", chat_history, audio_out, status_label, sources_label
+        chat_history.append((user_message, bot_reply))
+        return "", chat_history, audio_out, status_label, sources_label
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        err_msg = f"⚠️ An error occurred while processing: {e}"
+        chat_history.append((user_message, err_msg))
+        return "", chat_history, None, f"Error: {e}", "N/A"
 
-@spaces.GPU
 def handle_voice_chat(audio_input, chat_history):
     """Transcribes audio using Whisper then processes question."""
     if audio_input is None:
         return "", chat_history, None, "No audio recorded.", "N/A"
 
-    transcription = stt.transcribe(audio_input)
-    if not transcription or not transcription.strip():
-        return "", chat_history, None, "Could not decipher speech. Please speak clearly into the microphone.", "N/A"
+    try:
+        transcription = stt.transcribe(audio_input)
+        if not transcription or not transcription.strip():
+            return "", chat_history, None, "Could not decipher speech. Please speak clearly into the microphone.", "N/A"
 
-    response = bot.ask(transcription, generate_speech=True)
-    
-    bot_reply = f"🎙️ *Voice Input:* \"{transcription}\"\n\n{response['answer']}"
-    audio_out = response["audio_path"]
-    status_label = f"Status: {response['guardrail_status']} (Confidence: {response['confidence']*100:.1f}%)"
-    sources_label = "Sources: " + (", ".join(response["sources"]) if response["sources"] else "None (Refused/Out-of-Scope)")
+        response = bot.ask(transcription, generate_speech=True)
+        bot_reply = f"🎙️ *Voice Input:* \"{transcription}\"\n\n{response['answer']}"
+        audio_out = response.get("audio_path")
+        status_label = f"Status: {response['guardrail_status']} (Confidence: {response['confidence']*100:.1f}%)"
+        sources_label = "Sources: " + (", ".join(response["sources"]) if response["sources"] else "None (Refused/Out-of-Scope)")
 
-    chat_history.append((f"🎤 [Spoken] {transcription}", response["answer"]))
-    return transcription, chat_history, audio_out, status_label, sources_label
+        chat_history.append((f"🎤 [Spoken] {transcription}", response["answer"]))
+        return transcription, chat_history, audio_out, status_label, sources_label
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        err_msg = f"⚠️ An error occurred during voice transcription: {e}"
+        chat_history.append(("🎤 [Voice Query]", err_msg))
+        return "", chat_history, None, f"Error: {e}", "N/A"
 
 def handle_clear_chat():
     """Resets conversation memory and UI."""
     bot.reset_memory()
     return [], None, "Memory Cleared", "N/A"
 
-@spaces.GPU
 def handle_poster_generation(title, tagline, date, venue, highlights, theme):
     """Generates an event poster via the studio tab."""
-    poster_path = poster_studio.generate(
-        event_title=title,
-        tagline=tagline,
-        date_str=date,
-        venue_str=venue,
-        highlights=highlights,
-        theme_name=theme
-    )
-    return poster_path
+    try:
+        poster_path = poster_studio.generate(
+            event_title=title,
+            tagline=tagline,
+            date_str=date,
+            venue_str=venue,
+            highlights=highlights,
+            theme_name=theme
+        )
+        return poster_path
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return None
 
 # Quick sample prompts
 SAMPLE_QUESTIONS = [
@@ -202,6 +221,10 @@ def load_sample(sample_idx):
     return SAMPLE_QUESTIONS[sample_idx]
 
 with gr.Blocks(title="Department FAQ Voice Chatbot | P24", css=CUSTOM_CSS, theme=gr.themes.Soft()) as demo:
+    # Hidden ZeroGPU probe satisfies Hugging Face ZeroGPU startup scanner
+    _probe_btn = gr.Button(visible=False)
+    _probe_btn.click(fn=_zerogpu_probe, outputs=None)
+
     with gr.Row():
         gr.HTML(
             """
