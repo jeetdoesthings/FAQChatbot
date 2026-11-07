@@ -31,8 +31,8 @@ class FAQRetriever:
 
         self.faq_path = Path(faq_path)
         self.model_name = model_name
-        print(f"[FAQRetriever] Loading Sentence-BERT model: '{self.model_name}'...")
-        self.model = SentenceTransformer(self.model_name)
+        print(f"[FAQRetriever] Loading Sentence-BERT model: '{self.model_name}' on CPU...")
+        self.model = SentenceTransformer(self.model_name, device="cpu")
         
         self.faqs: List[Dict[str, Any]] = []
         self.question_embeddings: np.ndarray = np.array([])
