@@ -24,8 +24,8 @@ class WhisperSTT:
 
         self.model_size = model_size
         print(f"[WhisperSTT] Loading Whisper model: '{self.model_size}'...")
-        # Device auto-selection (mps/cuda/cpu)
-        self.model = whisper.load_model(self.model_size)
+        # Load on CPU during startup to avoid ZeroGPU sparse tensor initialization errors
+        self.model = whisper.load_model(self.model_size, device="cpu")
         self._initialized = True
         print(f"[WhisperSTT] Model '{self.model_size}' loaded successfully.")
 
