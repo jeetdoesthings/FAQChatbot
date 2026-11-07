@@ -40,6 +40,25 @@ try:
 except Exception:
     pass
 
+# Compatibility patch for pydantic 2.10+ boolean schemas in Gradio 4.x OpenAPI generator
+try:
+    import gradio_client.utils
+    orig_get_type = gradio_client.utils.get_type
+    def safe_get_type(s):
+        if not isinstance(s, dict):
+            return "Any"
+        return orig_get_type(s)
+    gradio_client.utils.get_type = safe_get_type
+
+    orig_json_schema = gradio_client.utils._json_schema_to_python_type
+    def safe_json_schema(s, defs=None):
+        if not isinstance(s, dict):
+            return "Any"
+        return orig_json_schema(s, defs)
+    gradio_client.utils._json_schema_to_python_type = safe_json_schema
+except Exception:
+    pass
+
 import gradio as gr
 
 from src.chatbot_core import DepartmentChatbot
@@ -282,5 +301,10 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=7860, help="Local port (default: 7860)")
     args = parser.parse_args()
 
-    print(f"[App] Starting Gradio application on port {args.port} (share={args.share})...")
-    demo.launch(server_name="0.0.0.0", server_port=args.port, share=args.share)
+    # In Hugging Face Spaces, call demo.launch() directly without hardcoded server_name
+    if os.environ.get("SPACE_ID"):
+        print("[App] Running inside Hugging Face Spaces cloud environment...")
+        demo.launch()
+    else:
+        print(f"[App] Starting Gradio application on port {args.port} (share={args.share})...")
+        demo.launch(server_name="0.0.0.0", server_port=args.port, share=args.share)
