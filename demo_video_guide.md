@@ -11,7 +11,7 @@
 ## ⏱️ Video Timeline & Scene Breakdown
 
 ### Scene 1: Introduction & Candidate Details (0:00 – 0:25)
-- **Visual:** Show browser with Gradio Web App header or slide displaying:
+- **Visual:** Show browser with Web App header or slide displaying:
   - Name: Jeet Ghegade
   - Roll No: 24 | Class: AIA 2 | Enrolment: ADT23SOCB0484
   - Project: P24 · Department FAQ Voice Chatbot
@@ -23,7 +23,7 @@
 
 ### Scene 2: Voice Input & Multi-Turn Spoken Interaction (0:25 – 1:05)
 - **Visual:** 
-  1. Click the microphone icon in Gradio.
+  1. Click the microphone icon in the Web App interface.
   2. Speak: *"What are the eligibility criteria and fees for the B.Tech AI program?"*
   3. Click **"Transcribe & Ask 🎙️"**.
   4. Point out Whisper STT transcription appearing in chat.

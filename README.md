@@ -11,13 +11,13 @@ pinned: false
 
 # 🏛️ Department FAQ Voice Chatbot (Project P24)
 
-> **Generative AI Capstone Project**  
+> **GENAI Project**  
 > **Student Name:** Jeet Ghegade  
 > **Roll Number:** 24  
 > **Class:** AIA 2  
 > **Enrolment Number:** ADT23SOCB0484  
-- **Live Universal URL (Hugging Face):** [https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)
-- **Live Universal URL (Gradio FRP Tunnel):** [https://fac2e8541ef1e9a672.gradio.live](https://fac2e8541ef1e9a672.gradio.live)
+> **Live Universal App URL:** [https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)  
+> **Official Repository:** [https://github.com/jeetdoesthings/FAQChatbot](https://github.com/jeetdoesthings/FAQChatbot)
 
 ---
 
@@ -54,7 +54,7 @@ flowchart TD
     RefusalEngine --> TTS
     
     TTS --> VoiceOut([Spoken Audio Output .mp3])
-    AnswerFormatter --> UI([Gradio Web Interface / Live Public URL])
+    AnswerFormatter --> UI([Interactive Web Application / Live Public URL])
     
     User -->|Poster Request| PosterEngine[High-Res Event Poster Studio]
     PosterEngine --> PosterOut([1080x1440 Publication Poster PNG])
@@ -104,45 +104,43 @@ Open your browser at `http://127.0.0.1:7860`.
 
 ---
 
-## 🌐 How to Generate a Universal Live App URL
+## 🌐 Universal Live Application Deployment
 
-To run and access the application from **any computer, phone, or tablet anywhere in the world**:
+The application is deployed live in the cloud and accessible 24/7 on Hugging Face Spaces:
+👉 **[https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)**
 
-### Method 1: Instant Universal Live URL via Gradio (Built-in)
-Run the app with the `--share` flag:
-```bash
-python3 app.py --share
-```
-Gradio automatically establishes a secure SSL FRP tunnel and displays:
-```
-Running on public URL: https://xxxxxxxxxxxxxxxx.gradio.live
-```
-Anyone with this URL can test voice input, text chat, and poster generation in real-time!
-
-### Method 2: Permanent Universal Hosting on Hugging Face Spaces (Active)
-Your live application is hosted at:
-**[https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)**
-
-To push code updates directly to your Space:
-```bash
-git remote add space https://huggingface.co/spaces/gladiatorspring/FAQChatbot
-git push space main
-```
+Anyone on desktop, tablet, or smartphone can interact via text or voice input and generate publication event posters!
 
 ---
 
 ## 📂 Repository Structure
 ```
-├── app.py                      # Interactive Gradio voice & text interface + live share
+├── app.py                      # Interactive Web voice & text application
 ├── generate_report.py          # Academic PDF Report Generator (24_Jeet_P24.pdf)
 ├── demo_video_guide.md         # 2-3 minute demonstration video recording script
 ├── requirements.txt            # Python dependencies
+├── packages.txt                # Container system dependencies (ffmpeg)
 ├── data/
 │   ├── department_faqs.json    # Department FAQ knowledge base
 │   └── lora_faq_dataset.jsonl  # LoRA instruction dataset
 ├── models/
 │   └── faq_lora_adapter/       # Trained LoRA adapter weights & config
 ├── outputs/
+│   ├── lora_training_loss.png  # Training loss convergence chart
+│   └── posters/                # Generated high-resolution event posters
+├── src/
+│   ├── chatbot_core.py         # Multi-turn engine integrating RAG, LoRA, and Guardrails
+│   ├── config.py               # Hyperparameters and path configurations
+│   ├── guardrails.py           # Out-of-scope refusal, PII redaction & hallucination block
+│   ├── lora_training.py        # LoRA training pipeline with PEFT
+│   ├── poster_generator.py     # Pillow-based publication poster graphic generator
+│   ├── rag_retriever.py        # Dense Sentence-BERT retrieval engine
+│   ├── stt_whisper.py          # OpenAI Whisper speech-to-text module
+│   ├── system_prompt.py        # System prompt with academic tone and scope definitions
+│   └── tts_engine.py           # Text-to-speech audio synthesizer
+└── tests/
+    └── test_chatbot.py         # Test suite validating Units U1 to U5
+```
 │   ├── lora_training_loss.png  # Training loss convergence chart
 │   └── posters/                # Generated high-resolution event posters
 ├── src/

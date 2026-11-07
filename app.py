@@ -59,6 +59,21 @@ try:
 except Exception:
     pass
 
+# Compatibility patch for Starlette 0.38+ TemplateResponse argument order in Gradio 4.x
+try:
+    import starlette.templating
+    orig_TemplateResponse = starlette.templating.Jinja2Templates.TemplateResponse
+    def safe_TemplateResponse(self, *args, **kwargs):
+        if len(args) >= 2 and isinstance(args[0], str) and isinstance(args[1], dict):
+            name = args[0]
+            context = args[1]
+            request = context.get("request")
+            return orig_TemplateResponse(self, request=request, name=name, context=context)
+        return orig_TemplateResponse(self, *args, **kwargs)
+    starlette.templating.Jinja2Templates.TemplateResponse = safe_TemplateResponse
+except Exception:
+    pass
+
 import gradio as gr
 
 from src.chatbot_core import DepartmentChatbot

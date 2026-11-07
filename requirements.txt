@@ -1,5 +1,7 @@
 gradio>=4.44.0
 pydantic<2.10.0
+fastapi<0.113.0
+starlette<0.38.0
 huggingface-hub<0.26.0
 torch>=2.0.0
 transformers>=4.40.0
