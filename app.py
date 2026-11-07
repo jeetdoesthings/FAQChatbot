@@ -8,6 +8,17 @@ Features:
 - Out-of-scope Refusal, Hallucination Blocking & Zero-PII Guardrails (U5)
 - Public shareable Live URL via Gradio Frp tunneling
 """
+# ZeroGPU initialization: MUST be the first import before torch/transformers/gradio
+try:
+    import spaces
+except Exception:
+    class spaces:
+        @staticmethod
+        def GPU(func=None, duration=None):
+            if func is None:
+                return lambda f: f
+            return func
+
 import os
 os.environ["USE_TF"] = "0"
 os.environ["TRANSFORMERS_NO_TF"] = "1"
@@ -73,17 +84,6 @@ try:
     starlette.templating.Jinja2Templates.TemplateResponse = safe_TemplateResponse
 except Exception:
     pass
-
-# ZeroGPU decorator support for Hugging Face Spaces
-try:
-    import spaces
-except Exception:
-    class spaces:
-        @staticmethod
-        def GPU(func=None, duration=None):
-            if func is None:
-                return lambda f: f
-            return func
 
 import gradio as gr
 
