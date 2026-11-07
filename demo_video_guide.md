@@ -3,6 +3,7 @@
 **Project Title:** P24 · Department FAQ Voice Chatbot  
 **Candidate:** Jeet Ghegade | Roll No: 24 | Class: AIA 2 | Enrolment: ADT23SOCB0484  
 **Target Duration:** 2 Minutes 30 Seconds  
+**Live App URL:** [https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)  
 **Repository:** [https://github.com/jeetdoesthings/FAQChatbot](https://github.com/jeetdoesthings/FAQChatbot)
 
 ---

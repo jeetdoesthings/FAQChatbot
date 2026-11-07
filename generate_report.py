@@ -181,12 +181,12 @@ def build_pdf_report(output_filename="24_Jeet_P24.pdf"):
             Paragraph("<b>Enrolment No:</b> ADT23SOCB0484", body_style)
         ],
         [
-            Paragraph("<b>GitHub Repository:</b> <a href='https://github.com/jeetdoesthings/FAQChatbot'><font color='#0284c7'>github.com/jeetdoesthings/FAQChatbot</font></a>", body_style),
-            Paragraph("<b>Live App URL:</b> <font color='#059669'><b>https://fac2e8541ef1e9a672.gradio.live</b></font>", body_style)
+            Paragraph("<b>GitHub Repository:</b> <a href='https://github.com/jeetdoesthings/FAQChatbot'><font color='#0284c7'><b>github.com/jeetdoesthings/FAQChatbot</b></font></a>", body_style),
+            Paragraph("<b>Live App Universal URL:</b> <a href='https://huggingface.co/spaces/gladiatorspring/FAQChatbot'><font color='#059669'><b>huggingface.co/spaces/gladiatorspring/FAQChatbot</b></font></a>", body_style)
         ],
         [
-            Paragraph("<b>Permanent Mirror:</b> <a href='https://huggingface.co/spaces/jeetdoesthings/FAQChatbot'><font color='#0284c7'>huggingface.co/spaces/jeetdoesthings/FAQChatbot</font></a>", body_style),
-            Paragraph("<b>Evaluation Date:</b> Academic Term 2026", body_style)
+            Paragraph("<b>Gradio Live Tunnel:</b> <font color='#0284c7'>https://fac2e8541ef1e9a672.gradio.live</font>", body_style),
+            Paragraph("<b>Evaluation Term:</b> Academic Year 2026", body_style)
         ]
     ]
     cand_table = Table(cand_data, colWidths=[3.2 * inch, 3.8 * inch])
@@ -418,15 +418,15 @@ def build_pdf_report(output_filename="24_Jeet_P24.pdf"):
         body_style
     ))
     story.append(Paragraph(
-        "• <b>Universal Live App URL (Gradio Secure FRP Tunnel):</b><br/>"
-        "&nbsp;&nbsp;&nbsp;&nbsp;<b><font color='#059669'>https://fac2e8541ef1e9a672.gradio.live</font></b><br/>"
-        "<i>To launch a new live session at any time:</i> <code>python3 app.py --share</code><br/>"
-        "Gradio instantly binds to the local backend, registers an encrypted SSL public gateway, and yields a universal live link.",
+        "• <b>Primary Live Universal App URL (Hugging Face Spaces Cloud):</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b><a href='https://huggingface.co/spaces/gladiatorspring/FAQChatbot'><font color='#059669'>https://huggingface.co/spaces/gladiatorspring/FAQChatbot</font></a></b><br/>"
+        "Provides 24/7 high-availability cloud hosting with public HTTPS accessibility from any device worldwide.",
         body_style
     ))
     story.append(Paragraph(
-        "• <b>Permanent Cloud Mirror (Hugging Face Spaces):</b><br/>"
-        "&nbsp;&nbsp;&nbsp;&nbsp;<b><a href='https://huggingface.co/spaces/jeetdoesthings/FAQChatbot'><font color='#0284c7'>https://huggingface.co/spaces/jeetdoesthings/FAQChatbot</font></a></b>",
+        "• <b>Live Instant Session (Gradio Secure SSL Tunnel):</b><br/>"
+        "&nbsp;&nbsp;&nbsp;&nbsp;<b><font color='#0284c7'>https://fac2e8541ef1e9a672.gradio.live</font></b><br/>"
+        "<i>To launch an active tunnel session at any time:</i> <code>python3 app.py --share</code>",
         body_style
     ))
     story.append(Paragraph(

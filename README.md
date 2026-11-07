@@ -5,7 +5,8 @@
 > **Roll Number:** 24  
 > **Class:** AIA 2  
 > **Enrolment Number:** ADT23SOCB0484  
-> **Official Repository:** [https://github.com/jeetdoesthings/FAQChatbot](https://github.com/jeetdoesthings/FAQChatbot)
+- **Live Universal URL (Hugging Face):** [https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)
+- **Live Universal URL (Gradio FRP Tunnel):** [https://fac2e8541ef1e9a672.gradio.live](https://fac2e8541ef1e9a672.gradio.live)
 
 ---
 
@@ -107,15 +108,15 @@ Running on public URL: https://xxxxxxxxxxxxxxxx.gradio.live
 ```
 Anyone with this URL can test voice input, text chat, and poster generation in real-time!
 
-### Method 2: Permanent Universal Hosting on Hugging Face Spaces (Free)
-1. Create a free account at [huggingface.co](https://huggingface.co).
-2. Click **New Space** -> Choose **Gradio** SDK.
-3. Push this repository to your Space repository:
-   ```bash
-   git remote add space https://huggingface.co/spaces/<your-username>/FAQChatbot
-   git push space main
-   ```
-4. Your permanent universal link will be: `https://huggingface.co/spaces/<your-username>/FAQChatbot`.
+### Method 2: Permanent Universal Hosting on Hugging Face Spaces (Active)
+Your live application is hosted at:
+**[https://huggingface.co/spaces/gladiatorspring/FAQChatbot](https://huggingface.co/spaces/gladiatorspring/FAQChatbot)**
+
+To push code updates directly to your Space:
+```bash
+git remote add space https://huggingface.co/spaces/gladiatorspring/FAQChatbot
+git push space main
+```
 
 ---
 
