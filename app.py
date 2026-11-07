@@ -15,6 +15,31 @@ os.environ["TRANSFORMERS_NO_TF"] = "1"
 import sys
 import argparse
 from pathlib import Path
+
+# Compatibility patch for huggingface_hub HfFolder in Gradio 4.x
+try:
+    import huggingface_hub
+    if not hasattr(huggingface_hub, "HfFolder"):
+        from huggingface_hub import constants, get_token
+        class HfFolder:
+            @classmethod
+            def save_token(cls, token: str) -> None:
+                path_token = Path(constants.HF_TOKEN_PATH)
+                path_token.parent.mkdir(parents=True, exist_ok=True)
+                path_token.write_text(token)
+            @classmethod
+            def get_token(cls):
+                return get_token()
+            @classmethod
+            def delete_token(cls) -> None:
+                try:
+                    Path(constants.HF_TOKEN_PATH).unlink()
+                except Exception:
+                    pass
+        huggingface_hub.HfFolder = HfFolder
+except Exception:
+    pass
+
 import gradio as gr
 
 from src.chatbot_core import DepartmentChatbot
