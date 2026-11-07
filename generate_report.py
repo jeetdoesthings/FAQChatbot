@@ -38,7 +38,7 @@ class NumberedCanvas(canvas.Canvas):
         
         # Header (Pages > 1)
         if self._pageNumber > 1:
-            self.drawString(54, letter[1] - 36, "P24 · Department FAQ Voice Chatbot | Capstone Report")
+            self.drawString(54, letter[1] - 36, "P24 · Department FAQ Voice Chatbot | GENAI Project Report")
             self.drawRightString(letter[0] - 54, letter[1] - 36, "Jeet Ghegade · Roll No: 24 · AIA 2")
             self.setStrokeColor(colors.HexColor("#cbd5e1"))
             self.setLineWidth(0.5)
@@ -165,7 +165,7 @@ def build_pdf_report(output_filename="24_Jeet_P24.pdf"):
     story = []
 
     # Title & Header Banner
-    story.append(Paragraph("CAPSTONE PROJECT TECHNICAL REPORT", subtitle_style))
+    story.append(Paragraph("GENAI PROJECT TECHNICAL REPORT", subtitle_style))
     story.append(Paragraph("P24 · Department FAQ Voice Chatbot", title_style))
     story.append(Paragraph("Multi-Turn Multimodal Agent with Whisper STT, Sentence-BERT RAG, LoRA Adaptation & Privacy Guardrails", subtitle_style))
     story.append(HRFlowable(width="100%", thickness=1.5, color=c_primary, spaceBefore=4, spaceAfter=12))
@@ -185,7 +185,7 @@ def build_pdf_report(output_filename="24_Jeet_P24.pdf"):
             Paragraph("<b>Live App Universal URL:</b> <a href='https://huggingface.co/spaces/gladiatorspring/FAQChatbot'><font color='#059669'><b>huggingface.co/spaces/gladiatorspring/FAQChatbot</b></font></a>", body_style)
         ],
         [
-            Paragraph("<b>Gradio Live Tunnel:</b> <font color='#0284c7'>https://fac2e8541ef1e9a672.gradio.live</font>", body_style),
+            Paragraph("<b>Project Domain:</b> Generative AI & Conversational Agents", body_style),
             Paragraph("<b>Evaluation Term:</b> Academic Year 2026", body_style)
         ]
     ]
@@ -418,15 +418,9 @@ def build_pdf_report(output_filename="24_Jeet_P24.pdf"):
         body_style
     ))
     story.append(Paragraph(
-        "• <b>Primary Live Universal App URL (Hugging Face Spaces Cloud):</b><br/>"
+        "• <b>Live Universal Application URL (Hugging Face Spaces Cloud):</b><br/>"
         "&nbsp;&nbsp;&nbsp;&nbsp;<b><a href='https://huggingface.co/spaces/gladiatorspring/FAQChatbot'><font color='#059669'>https://huggingface.co/spaces/gladiatorspring/FAQChatbot</font></a></b><br/>"
-        "Provides 24/7 high-availability cloud hosting with public HTTPS accessibility from any device worldwide.",
-        body_style
-    ))
-    story.append(Paragraph(
-        "• <b>Live Instant Session (Gradio Secure SSL Tunnel):</b><br/>"
-        "&nbsp;&nbsp;&nbsp;&nbsp;<b><font color='#0284c7'>https://fac2e8541ef1e9a672.gradio.live</font></b><br/>"
-        "<i>To launch an active tunnel session at any time:</i> <code>python3 app.py --share</code>",
+        "Provides 24/7 high-availability cloud hosting with public HTTPS accessibility from any desktop, tablet, or smartphone worldwide.",
         body_style
     ))
     story.append(Paragraph(
